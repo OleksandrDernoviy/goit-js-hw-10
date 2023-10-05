@@ -6,6 +6,7 @@ img {
 
 .txt-div {
     width: 400px;
+    
 }
 
 .img-div {
@@ -17,15 +18,18 @@ img {
 
 h1 {
     color: darkgreen;
+    text-align: center;
 }
 
-.is-hidden {
+
+
+ .is-hidden {
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
     position: absolute;
     overflow: hidden;
-}
+} 
 
 
 .loader {
@@ -122,5 +126,8 @@ h1 {
     max-width: 400px;
     margin-bottom: 15px; 
 }
+
+ 
+
 
 

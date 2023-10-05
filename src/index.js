@@ -3,29 +3,29 @@ import './styles.css'
 import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.css'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
-
+ 
 const selectEl = document.querySelector('.breed-select')
 const loaderEl = document.querySelector('.loader')
 const errorEl = document.querySelector('.error')
 const catInfoEl = document.querySelector('.cat-info')
-
 loaderEl.classList.replace('loader', 'is-hidden')
 errorEl.classList.add('is-hidden')
 catInfoEl.classList.add('is-hidden')
+let breedsIdArr =[]
 
-let breedsIdArr = []
-fetchBreeds()
-.then(data => {
-data.forEach(el => {
-    breedsIdArr.push({ text: el.name, value: el.id })
-    });
- new SlimSelect({
-        select: selectEl,
-        data: breedsIdArr
-    });
-    })
-.catch(onError)
-console.log(breedsIdArr)  
+inSlimSelect()
+function inSlimSelect(data) {
+fetchBreeds(data)
+  .then(data => {
+    breedsIdArr = data.map(({ name, id }) => {
+     return `<option value = '${id}'>${name}</option>`
+            })
+     selectEl.insertAdjacentHTML('beforeend', breedsIdArr)
+        new SlimSelect({
+            select: selectEl,
+        })
+        }).catch(onError)     
+}
 selectEl.addEventListener('change', onSelect)
 
 function onSelect(evt) {
@@ -57,4 +57,10 @@ Notify.failure('Oops! Something went wrong! Try reloading the page or select ano
     fontSize: '20px'
     })
 }
+
+
+
+
+
+
 
